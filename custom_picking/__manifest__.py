@@ -15,7 +15,7 @@
     ],
     
     'data': [
-        # 'views/picking.xml',
+         'views/picking.xml',
     ],
     'installable': True,
     'auto_install': False,
