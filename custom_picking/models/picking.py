@@ -27,16 +27,16 @@ class StockMoveLine(models.Model):
             if line.picking_id.picking_type_id.code == 'incoming':
                 
                 qty_wh = self.env['stock.quant']._gather(
-                    line.product_id, self.picking_id.location_dest_id).mapped('quantity')
+                    line.product_id, line.picking_id.location_dest_id).mapped('quantity')
                 qty_wh_reserved = self.env['stock.quant']._gather(
-                    line.product_id, self.picking_id.location_dest_id).mapped('reserved_quantity')
+                    line.product_id, line.picking_id.location_dest_id).mapped('reserved_quantity')
                 if qty_wh and qty_wh_reserved:
                     line.qty_available = sum(qty_wh) - sum(qty_wh_reserved)
             else:
                 
                 qty_wh = self.env['stock.quant']._gather(
-                    line.product_id, self.picking_id.location_id).mapped('quantity')
+                    line.product_id, line.picking_id.location_id).mapped('quantity')
                 qty_wh_reserved = self.env['stock.quant']._gather(
-                    line.product_id, self.picking_id.location_id).mapped('reserved_quantity')
+                    line.product_id, line.picking_id.location_id).mapped('reserved_quantity')
                 if qty_wh and qty_wh_reserved:
                     line.qty_available = sum(qty_wh) - sum(qty_wh_reserved)
